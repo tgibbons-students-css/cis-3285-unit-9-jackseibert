@@ -1,11 +1,20 @@
 ﻿using System;
-
+using System.IO;
 using SingleResponsibilityPrinciple.Contracts;
 
 namespace SingleResponsibilityPrinciple
 {
     public class ConsoleLogger : ILogger
     {
+        //Log Message code to send to an XML file. Request 405.
+        private void LogMessage(string type, string message, params object[] args)
+        {
+            Console.WriteLine(type + ": " + message, args);
+            using (StreamWriter logfile = File.AppendText("log.xml"))
+            {
+                logfile.WriteLine("<log><type>" + type + "</type><message>" + message + "</message></log> ", args);
+            }
+        }
         public void LogWarning(string message, params object[] args)
         {
             Console.WriteLine(string.Concat("WARN: ", message), args);
@@ -14,6 +23,6 @@ namespace SingleResponsibilityPrinciple
         public void LogInfo(string message, params object[] args)
         {
             Console.WriteLine(string.Concat("INFO: ", message), args);
-        }
+        }  
     }
 }
