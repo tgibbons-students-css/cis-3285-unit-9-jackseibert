@@ -23,7 +23,12 @@ namespace SingleResponsibilityPrinciple
             var tradeProcessor = new TradeProcessor(tradeDataProvider, tradeParser, tradeStorage);
             tradeProcessor.ProcessTrades();
 
-            Console.ReadKey();
+            //Request 409. Save trades to database on remote SQL server.
+            string connectSqlServer = "Data Source = athena.css.edu; Initial Catalog = CIS3285; Persist Security Info = True; User ID = tgibbons; Password = Data Source = athena.css.edu; Initial Catalog = CIS3285; Persist Security Info = True; User ID = tgibbons; Password = Saints4CSS";
+            using (var connection = new System.Data.SqlClient.SqlConnection(connectSqlServer))
+
+
+                Console.ReadKey();
         }
     }
 }
